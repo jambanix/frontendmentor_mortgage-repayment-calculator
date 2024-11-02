@@ -1,28 +1,44 @@
-import { useState } from "react";
 import { Input } from "../components/Input"
 import { Radio } from "./Radio"
 import { useForm } from "react-hook-form"
 
+const defaultValues = {
+  mortgageAmount: "",
+  mortgageTerm: "",
+  mortgageRate: "",
+  repaymentType: "repayment"
+}
+
 export const Form = ({ onSubmit }) => {
 
-  const {register, handleSubmit, watch, setValue} = useForm();
+  const {register, handleSubmit, watch, setValue, formState: {errors, dirtyFields}, reset, clearErrors} = useForm({
+    defaultValues: {
+      ...defaultValues
+    }
+  });
+
   const selectedRepaymentType = watch("repaymentType");
+  const handleReset = () => {
+    clearErrors();
+    reset();
+  }
+
 
   return (
     <section className="bg-white rounded-tl-xl rounded-bl-xl">
-      <form className="flex flex-col p-4 gap-4" onSubmit={handleSubmit(onSubmit)}>
+      <form noValidate className="flex flex-col p-4 gap-4" onSubmit={handleSubmit(onSubmit)}>
 
         {/* Header and clear button */}
         <header className="flex flex-col sm:flex-row sm:justify-between">
           <h1 className="text-slate-900 font-bold text-xl">Mortgage Calculator</h1>
-          <button className="bg-none h-fit w-fit underline text-slate-700 text-sm">Clear all</button>
+          <button className="bg-none h-fit w-fit underline text-slate-700 text-sm" onClick={handleReset}>Clear all</button>
         </header>
 
         {/* Input group */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <Input label="Mortgage Amount" unit="£" containerClassName="sm:col-span-full" {...register("mortgageAmount", {required: true, pattern: {value: /^[\.0-9]*/, message: "Enter a valid mortgage amount"}})} />
-          <Input label="Mortgage Term" unit="years" unitOrientationRight containerClassName="sm:col-start-1" {...register("mortgageTerm", {required: true, pattern: {value: /^[0-9]*/, message: "Enter a valid term"}})} />
-          <Input label="Interest Rate" unit="%" unitOrientationRight containerClassName="sm:col-start-2" {...register("mortgageRate", {required: true, pattern: {value: /^[\.0-9]*/, message: "Enter a valid interest rate"}})}/>
+          <Input error={dirtyFields.mortgageAmount && errors?.mortgageAmount}label="Mortgage Amount" unit="£" containerClassName="sm:col-span-full" {...register("mortgageAmount", {required: true, pattern: {value: /^[\.0-9]*$/, message: "Enter a valid mortgage amount"}})} />
+          <Input error={dirtyFields.mortgageTerm && errors?.mortgageTerm} label="Mortgage Term" unit="years" unitOrientationRight containerClassName="sm:col-start-1" {...register("mortgageTerm", {required: true, pattern: {value: /^[0-9]*$/, message: "Enter a valid term"}})} />
+          <Input error={dirtyFields.mortgageRate && errors?.mortgageRate && dirtyFields} label="Interest Rate" unit="%" unitOrientationRight containerClassName="sm:col-start-2" {...register("mortgageRate", {required: true, pattern: {value: /^[\.0-9]*$/, message: "Enter a valid interest rate"}})}/>
         </div>
 
         {/* Radio group */}
