@@ -49,7 +49,7 @@ function App() {
   return (
     <>
       <main>
-        <div className="flex items-center justify-center w-full min-h-screen bg-slate-300">
+        <div className="flex items-center justify-center w-full min-h-screen bg-slate-100">
           <div className="grid grid-rows-[min-content_min-content] grid-cols-1 lg:grid-rows-1 lg:grid-cols-2 w-full max-w-[688px] lg:max-w-[1008px] lg:w-[1008px] bg-white rounded-xl">
             <Form onClear={handleClear} onSubmit={handleSubmit}/>
             <Results result={result} />
