@@ -29,7 +29,7 @@ export const Input = forwardRef(
           return `rounded-r-lg border-r border-b border-t ${
             isFocusing
               ? "border-t-lime border-b-lime border-r-lime bg-lime text-slate-900"
-              : "border-t-slate-300 border-b-slate-300 border-r-slate-300 bg-slate-300"
+              : "border-t-slate-300 border-b-slate-300 border-r-slate-300 bg-slate-100"
           }`;
         }
       } else {
@@ -39,7 +39,7 @@ export const Input = forwardRef(
           return `rounded-l-lg border-l border-b border-t ${
             isFocusing
               ? "border-t-lime border-b-lime border-l-lime bg-lime text-slate-900"
-              : "border-t-slate-300 border-b-slate-300 border-l-slate-300 bg-slate-300"
+              : "border-t-slate-300 border-b-slate-300 border-l-slate-300 bg-slate-100"
           }`;
         }
       }
