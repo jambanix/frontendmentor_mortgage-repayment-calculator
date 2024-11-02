@@ -3,7 +3,6 @@ import { useState } from 'react';
 import './App.css'
 import { Form } from './components/Form'
 import { Results } from "./components/Results"
-import { EmptyResult } from './components/EmptyResult';
 
 const calculate = (amount, term, rate, repaymentType="repayment") => {
   amount = Number(amount);
