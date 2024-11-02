@@ -33,7 +33,7 @@ export const Form = ({ onSubmit, onClear }) => {
   };
 
   return (
-    <section className="bg-white rounded-tl-xl rounded-bl-xl">
+    <section className="bg-white md:rounded-tl-xl md:rounded-tr-xl lg:rounded-bl-xl ">
       <form
         noValidate
         className="flex flex-col p-6 gap-4"
