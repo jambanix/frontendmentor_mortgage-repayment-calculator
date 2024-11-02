@@ -1,6 +1,7 @@
 import { Input } from "../components/Input"
 import { Radio } from "./Radio"
 import { useForm } from "react-hook-form"
+import calculatorIcon from "../assets/images/icon-calculator.svg"
 
 const defaultValues = {
   mortgageAmount: "",
@@ -39,7 +40,7 @@ export const Form = ({ onSubmit, onClear }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Input error={dirtyFields.mortgageAmount && errors?.mortgageAmount}label="Mortgage Amount" unit="£" containerClassName="sm:col-span-full" {...register("mortgageAmount", {required: true, pattern: {value: /^[\.0-9]*$/, message: "Enter a valid mortgage amount"}})} />
           <Input error={dirtyFields.mortgageTerm && errors?.mortgageTerm} label="Mortgage Term" unit="years" unitOrientationRight containerClassName="sm:col-start-1" {...register("mortgageTerm", {required: true, pattern: {value: /^[0-9]*$/, message: "Enter a valid term"}})} />
-          <Input error={dirtyFields.mortgageRate && errors?.mortgageRate && dirtyFields} label="Interest Rate" unit="%" unitOrientationRight containerClassName="sm:col-start-2" {...register("mortgageRate", {required: true, pattern: {value: /^[\.0-9]*$/, message: "Enter a valid interest rate"}})}/>
+          <Input error={dirtyFields.mortgageRate && errors?.mortgageRate} label="Interest Rate" unit="%" unitOrientationRight containerClassName="sm:col-start-2" {...register("mortgageRate", {required: true, pattern: {value: /^[\.0-9]*$/, message: "Enter a valid interest rate"}})}/>
         </div>
 
         {/* Radio group */}
@@ -50,7 +51,10 @@ export const Form = ({ onSubmit, onClear }) => {
         </div>
 
         {/* Submit button */}
-        <button type="submit" className="rounded-full bg-lime transition-all text-slate-900 w-full sm:max-w-[314px] h-12 hover:contrast-125">Calculate</button>
+        <button type="submit" className="flex items-center justify-center gap-4 rounded-full bg-lime transition-all text-slate-900 w-full sm:max-w-[314px] h-12 hover:contrast-125 flex gap-3">
+          <img src={calculatorIcon} alt="icon calculator"className="w-6 h-6"/>
+          <p>Calculate repayments</p>
+        </button>
       </form>
     </section>
   )

@@ -18,7 +18,8 @@ export default {
       "slate-300": "#9abed5",
       "slate-100": "#e4f4fd",
       "red": "#d73328",
-      "white": "#ffffff"
+      "white": "#ffffff",
+      "black": "#000000"
     }
   },
   plugins: [],

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import './App.css'
 import { Form } from './components/Form'
 import { Results } from "./components/Results"
+import { EmptyResult } from './components/EmptyResult';
 
 const calculate = (amount, term, rate, repaymentType="repayment") => {
   amount = Number(amount);
@@ -17,8 +18,8 @@ const calculate = (amount, term, rate, repaymentType="repayment") => {
     const divisor = (Math.pow(1 + interestRateMultiplier, termMonths)) - 1
     const paymentAmount = amount * (quotient / divisor);
     return {
-      payment: paymentAmount,
-      total: paymentAmount * termMonths
+      payment: paymentAmount.toFixed(2),
+      total: (paymentAmount * termMonths).toFixed(2)
     }
   }
 
@@ -26,8 +27,8 @@ const calculate = (amount, term, rate, repaymentType="repayment") => {
     const paymentAmount = (amount * (interestRateMultiplier * 12) / 12);
     const total = (paymentAmount * termMonths) + amount;
     return {
-      payment: paymentAmount,
-      total: total
+      payment: paymentAmount.toFixed(2),
+      total: total.toFixed(2)
     }
   }
   return (repaymentType === "repayment" ? repaymentCalc() : interestOnlyCalc())
@@ -39,9 +40,10 @@ function App() {
 
   const handleSubmit = (formValues) => {
     const {mortgageAmount, mortgageTerm, mortgageRate, repaymentType} = formValues;
+    const {payment, total} = calculate(mortgageAmount, mortgageTerm, mortgageRate, repaymentType);
+    setResult(prev => ({payment: payment, total: total}));
   }
 
-  calculate(300000, 25, 5.25);
 
   const handleClear = () => setResult(prev => undefined);
 
@@ -49,9 +51,9 @@ function App() {
     <>
       <main>
         <div className="flex items-center justify-center w-full min-h-screen bg-slate-300">
-          <div className="grid grid-rows-2 grid-cols-1 lg:grid-rows-1 lg:grid-cols-2 w-full max-w-[688px] lg:max-w-[1008px] lg:w-[1008px] bg-white rounded-xl">
-            <Form onSubmit={handleSubmit}/>
-            <Results result={result}/>
+          <div className="grid grid-rows-[min-content_min-content] grid-cols-1 lg:grid-rows-1 lg:grid-cols-2 w-full max-w-[688px] lg:max-w-[1008px] lg:w-[1008px] bg-white rounded-xl">
+            <Form onClear={handleClear} onSubmit={handleSubmit}/>
+            <Results result={result} />
           </div>
         </div>
       </main>
