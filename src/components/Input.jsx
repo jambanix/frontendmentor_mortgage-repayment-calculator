@@ -4,8 +4,7 @@ import { forwardRef, useState } from "react";
 export const Input = forwardRef(({unit, label, unitOrientationRight=false, containerClassName=null, name, onChange, onBlur, error}, ref) => {
 
   const position = unitOrientationRight ? "absolute right-0" : "absolute left-0";
-  const inputPadding = !unitOrientationRight ? "pl-12 pr-4" : "px-4";
-  const iconStyle = error ? "bg-red" : "bg-slate-100";
+  const inputPadding = !unitOrientationRight ? "pl-14 pr-4" : "px-4";
 
   const [isFocusing, setIsFocusing] = useState(false);
 
