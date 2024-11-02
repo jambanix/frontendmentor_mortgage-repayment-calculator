@@ -9,7 +9,7 @@ const defaultValues = {
   repaymentType: "repayment"
 }
 
-export const Form = ({ onSubmit }) => {
+export const Form = ({ onSubmit, onClear }) => {
 
   const {register, handleSubmit, watch, setValue, formState: {errors, dirtyFields}, reset, clearErrors} = useForm({
     defaultValues: {
@@ -21,6 +21,7 @@ export const Form = ({ onSubmit }) => {
   const handleReset = () => {
     clearErrors();
     reset();
+    onClear();
   }
 
 
