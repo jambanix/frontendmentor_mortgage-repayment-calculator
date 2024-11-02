@@ -1,13 +1,13 @@
+import { useState } from "react";
 import { Input } from "../components/Input"
 import { Radio } from "./Radio"
 import { useForm } from "react-hook-form"
 
 export const Form = ({ onSubmit }) => {
 
-  const {register, handleSubmit, formState, getValues} = useForm();
+  const {register, handleSubmit, watch, setValue} = useForm();
+  const selectedRepaymentType = watch("repaymentType");
 
-
-  console.log(getValues());
   return (
     <section className="bg-white rounded-tl-xl rounded-bl-xl">
       <form className="flex flex-col p-4 gap-4" onSubmit={handleSubmit(onSubmit)}>
@@ -28,8 +28,8 @@ export const Form = ({ onSubmit }) => {
         {/* Radio group */}
         <div className="flex flex-col gap-2 w-full sm:col-span-2">
           <label htmlFor="">Mortgage Type</label>
-          <Radio label="Repayment" name="repayment" {...register("repayment")}/>
-          <Radio label="Interest Only" name="interest" {...register("interest")}/>
+          <Radio onSelect={setValue} label="Repayment" name="repayment" value="repayment" {...register("repaymentType")} selectedType={selectedRepaymentType}/>
+          <Radio onSelect={setValue} label="Interest Only" name="interest" value="interest" {...register("repaymentType")} selectedType={selectedRepaymentType}/>
         </div>
 
         {/* Submit button */}
